@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agro Forte, Futuro Sustentável</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #e8f5e9;
+    text-align:center;
+    margin:0;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+.status{
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    width:150px;
+    margin:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+button{
+    padding:12px;
+    margin:8px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.acao{
+    background:#43a047;
+    color:white;
+}
+
+#mensagem{
+    margin-top:20px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+#resultado{
+    margin-top:30px;
+    font-size:22px;
+    color:#1b5e20;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌱 Agro Forte, Futuro Sustentável 🌱</h1>
+<p>Simulador de Fazenda Sustentável</p>
+</header>
+
+<div class="container">
+
+<div class="status">
+
+<div class="card">
+<h3>💰 Dinheiro</h3>
+<p id="dinheiro">100</p>
+</div>
+
+<div class="card">
+<h3>💧 Água</h3>
+<p id="agua">100</p>
+</div>
+
+<div class="card">
+<h3>🌾 Solo</h3>
+<p id="solo">100</p>
+</div>
+
+<div class="card">
+<h3>🌳 Sustentabilidade</h3>
+<p id="sustentabilidade">50</p>
+</div>
+
+</div>
+
+<h2>Escolha uma ação:</h2>
+
+<button class="acao" onclick="plantio()">🌾 Plantio Intensivo</button>
+
+<button class="acao" onclick="irrigacao()">💧 Irrigação Inteligente</button>
+
+<button class="acao" onclick="reflorestamento()">🌳 Reflorestamento</button>
+
+<button class="acao" onclick="energia()">☀️ Energia Solar</button>
+
+<p id="mensagem"></p>
+
+<div id="resultado"></div>
+
+</div>
+
+<script>
+
+let dinheiro = 100;
+let agua = 100;
+let solo = 100;
+let sustentabilidade = 50;
+let rodada = 0;
+
+function atualizar(){
+document.getElementById("dinheiro").innerText = dinheiro;
+document.getElementById("agua").innerText = agua;
+document.getElementById("solo").innerText = solo;
+document.getElementById("sustentabilidade").innerText = sustentabilidade;
+
+if(rodada >= 10){
+finalizar();
+}
+}
+
+function plantio(){
+dinheiro += 20;
+solo -= 15;
+sustentabilidade -= 5;
+rodada++;
+mensagem("Você aumentou a produção, mas desgastou o solo.");
+atualizar();
+}
+
+function irrigacao(){
+dinheiro -= 10;
+agua += 15;
+sustentabilidade += 5;
+rodada++;
+mensagem("Você utilizou irrigação eficiente.");
+atualizar();
+}
+
+function reflorestamento(){
+dinheiro -= 20;
+sustentabilidade += 25;
+solo += 10;
+rodada++;
+mensagem("Você investiu na preservação ambiental.");
+atualizar();
+}
+
+function energia(){
+dinheiro -= 30;
+sustentabilidade += 20;
+rodada++;
+mensagem("Você instalou energia solar.");
+atualizar();
+}
+
+function mensagem(texto){
+document.getElementById("mensagem").innerText = texto;
+}
+
+function finalizar(){
+
+let texto = "";
+
+if(sustentabilidade >= 100){
+texto = "🏆 Parabéns! Sua fazenda se tornou um exemplo de sustentabilidade.";
+}
+else if(sustentabilidade >= 70){
+texto = "🌱 Boa gestão! Sua fazenda está no caminho sustentável.";
+}
+else{
+texto = "⚠️ Sua produção cresceu, mas faltou cuidar do meio ambiente.";
+}
+
+document.getElementById("resultado").innerHTML =
+"<h2>Fim do Jogo</h2>" + texto;
+
+let botoes = document.querySelectorAll("button");
+
+botoes.forEach(botao=>{
+botao.disabled = true;
+});
+}
+
+</script>
+
+</body>
+</html>
